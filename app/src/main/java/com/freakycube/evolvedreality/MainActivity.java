@@ -69,6 +69,9 @@ public class MainActivity extends CardboardActivity implements CardboardView.Ste
 
         hud_info = new HUD_Info();
         camBackground = new CamBackground();
+
+        // Test new
+        Log.i("test", "test");
     }
     @Override
     public void onSurfaceChanged(int width, int height) {
