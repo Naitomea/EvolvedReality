@@ -19,7 +19,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 public class MainActivity extends CardboardActivity implements CardboardView.StereoRenderer {
     private static final String TAG = "MainActivity";
 
-    private static final float CAMERA_Z = 0.01f;
+    private static final float CAMERA_Z = 0.0f;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 100.0f;
 
@@ -89,7 +89,10 @@ public class MainActivity extends CardboardActivity implements CardboardView.Ste
         //Matrix.rotateM(modelCube, 0, 0.3f, 0.f, 0.f, 1.0f);
 
         // Build the camera matrix and apply it to the ModelView.
-        Matrix.setLookAtM(cameraMatrix, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(cameraMatrix, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.01f, 0.0f, 1.0f, 0.0f);
+        /*********************/
+        //Matrix.translateM(cameraMatrix, 0, 0, 0, 15f);
+        /*********************/
 
         headTransform.getHeadView(headView, 0);
 
@@ -110,6 +113,12 @@ public class MainActivity extends CardboardActivity implements CardboardView.Ste
 
         // Apply the eye transformation to the camera for calculate viewMatrix.
         Matrix.multiplyMM(viewMatrix, 0, eye.getEyeView(), 0, cameraMatrix, 0);
+
+        /*Log.i(TAG, String.valueOf(viewMatrix[0]) + "-" + String.valueOf(viewMatrix[1]) + "-" + String.valueOf(viewMatrix[2]) + "-" + String.valueOf(viewMatrix[3]) + "\n"
+                + String.valueOf(viewMatrix[4]) + "-" + String.valueOf(viewMatrix[5]) + "-" + String.valueOf(viewMatrix[6]) + "-" + String.valueOf(viewMatrix[7]) + "\n"
+                + String.valueOf(viewMatrix[8]) + "-" + String.valueOf(viewMatrix[9]) + "-" + String.valueOf(viewMatrix[10]) + "-" + String.valueOf(viewMatrix[11]) + "\n"
+                + String.valueOf(viewMatrix[12]) + "-" + String.valueOf(viewMatrix[13]) + "-" + String.valueOf(viewMatrix[14]) + "-" + String.valueOf(viewMatrix[15]));*/
+        //Matrix.translateM(cameraMatrix, 0, 0, 0, 15f);
         // Get projectionMatrix
         float[] projectionMatrix = eye.getPerspective(Z_NEAR, Z_FAR);
 

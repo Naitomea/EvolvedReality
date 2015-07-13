@@ -2,6 +2,7 @@ package com.freakycube.evolvedreality;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.os.SystemClock;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -98,10 +99,19 @@ public class HUD_Info {
 
         Matrix.setIdentityM(modelMatrix, 0);
         // Object first appears directly in front of user.
-        Matrix.translateM(modelMatrix, 0, 0, 0, -3.0f);
+        Matrix.translateM(modelMatrix, 0, 0, 0, 3.0f);
     }
 
     public void draw(float[] viewMatrix, float[] projectionMatrix){
+        /*********************/
+        /*Matrix.setIdentityM(modelMatrix, 0);
+        Matrix.translateM(modelMatrix, 0, 0, 0, 3.f);*/
+        //Matrix.rotateM(modelMatrix, 0, 360, 0, (1/10000)*(SystemClock.uptimeMillis()%10000), 0);
+        /*Matrix.translateM(modelMatrix, 0, 0, 0, -3.f);
+        Matrix.rotateM(modelMatrix, 0, 1, 0, 1, 0);
+        Matrix.translateM(modelMatrix, 0, 0, 0, 3.f);*/
+        /*********************/
+
         //GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE);
